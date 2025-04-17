@@ -4,7 +4,7 @@ resource "random_id" "cluster_id" {
 }
 
 resource "aws_elasticache_parameter_group" "redis" {
-  family = "redis7.0"
+  family = "redis7"
   name   = "${random_id.cluster_id.hex}-params"
 
   description = "Redis 7.0 parameter group for ${random_id.cluster_id.hex}"
