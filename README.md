@@ -53,10 +53,10 @@ module "redis" {
 ## Notes
 
 - The cluster ID is automatically generated with a 'redis-' prefix
-- Redis version is fixed at 7.0
+- Redis version 7.0 is used
+- A custom parameter group is created for Redis 7.0
 - Single node configuration (num_cache_nodes = 1)
 - Default Redis port (6379) is used
-- Default Redis parameter group (default.redis7.0) is used
 - Security groups are optional but recommended for production use
 
 ## License

@@ -3,6 +3,13 @@ resource "random_id" "cluster_id" {
   prefix      = "redis-"
 }
 
+resource "aws_elasticache_parameter_group" "redis" {
+  family = "redis7.0"
+  name   = "${random_id.cluster_id.hex}-params"
+
+  description = "Redis 7.0 parameter group for ${random_id.cluster_id.hex}"
+}
+
 resource "aws_elasticache_subnet_group" "this" {
   count      = var.create_subnet_group ? 1 : 0
   name       = "${random_id.cluster_id.hex}-subnet-group"
@@ -14,7 +21,7 @@ resource "aws_elasticache_cluster" "this" {
   engine               = "redis"
   node_type            = var.node_type
   num_cache_nodes      = 1
-  parameter_group_name = "default.redis7.0"
+  parameter_group_name = aws_elasticache_parameter_group.redis.name
   port                 = 6379
   subnet_group_name    = var.create_subnet_group ? aws_elasticache_subnet_group.this[0].name : var.subnet_group_name
   security_group_ids   = var.security_group_ids
