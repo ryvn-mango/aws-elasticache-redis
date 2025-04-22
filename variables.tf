@@ -1,36 +1,31 @@
+# Required variables
+
 variable "region" {
   description = "AWS region"
   type        = string
 }
 
-variable "node_type" {
-  description = "The compute and memory capacity of the nodes"
+variable "vpc_id" {
+  description = "VPC ID where the Redis cluster will be created"
   type        = string
-  default     = "cache.t3.micro"
 }
 
-variable "subnet_group_name" {
-  description = "Name for the cache subnet group (if not creating one)"
-  type        = string
-  default     = null
-}
-
-variable "create_subnet_group" {
-  description = "Whether to create a subnet group"
-  type        = bool
-  default     = true
+variable "allowed_cidr_blocks" {
+  description = "List of CIDR blocks that can access the Redis cluster"
+  type        = list(string)
 }
 
 variable "subnet_ids" {
   description = "List of VPC Subnet IDs for the cache subnet group"
   type        = list(string)
-  default     = []
 }
 
-variable "security_group_ids" {
-  description = "List of VPC security group IDs"
-  type        = list(string)
-  default     = []
+# Optional variables with defaults
+
+variable "node_type" {
+  description = "The compute and memory capacity of the nodes"
+  type        = string
+  default     = "cache.r7g.large"
 }
 
 variable "tags" {

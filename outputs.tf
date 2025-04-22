@@ -15,5 +15,5 @@ output "endpoint" {
 
 output "subnet_group_name" {
   description = "The name of the subnet group"
-  value       = var.create_subnet_group ? aws_elasticache_subnet_group.this[0].name : var.subnet_group_name
+  value       = aws_elasticache_subnet_group.this.name
 }
